@@ -64,6 +64,7 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
@@ -117,7 +118,7 @@
             this.默认ToolStripMenuItem,
             this.透明ToolStripMenuItem});
             this.主题ToolStripMenuItem.Name = "主题ToolStripMenuItem";
-            this.主题ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.主题ToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.主题ToolStripMenuItem.Text = "主题";
             // 
             // 默认ToolStripMenuItem
@@ -141,7 +142,7 @@
             this.楷体ToolStripMenuItem,
             this.monotypeCorsivaToolStripMenuItem});
             this.字体ToolStripMenuItem.Name = "字体ToolStripMenuItem";
-            this.字体ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.字体ToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.字体ToolStripMenuItem.Text = "字体";
             // 
             // 默认ToolStripMenuItem1
@@ -305,12 +306,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(214, 15);
+            this.groupBox1.Location = new System.Drawing.Point(202, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(116, 60);
+            this.groupBox1.Size = new System.Drawing.Size(116, 75);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "播放模式";
@@ -318,7 +320,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(7, 40);
+            this.radioButton2.Location = new System.Drawing.Point(6, 33);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(81, 18);
             this.radioButton2.TabIndex = 1;
@@ -359,7 +361,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(277, 78);
+            this.label5.Location = new System.Drawing.Point(10, 63);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 14;
@@ -370,6 +372,17 @@
             // 
             this.timer3.Enabled = true;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(6, 51);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(81, 18);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "单曲循环";
+            this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -448,6 +461,7 @@
         private System.Windows.Forms.ToolStripMenuItem 默认ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 楷体ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem monotypeCorsivaToolStripMenuItem;
+        private System.Windows.Forms.RadioButton radioButton3;
     }
 }
 

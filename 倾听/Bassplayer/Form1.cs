@@ -18,7 +18,7 @@ namespace Bassplayer
             InitializeComponent();
         }
         bool p = false;
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)//加载窗口时自动设置字体
         {
             FontFamily songti = new FontFamily("宋体");
             this.Font = new Font(songti, 9);
@@ -48,7 +48,7 @@ namespace Bassplayer
                 {
                     MessageBox.Show("bass初始化出错" + Bass.BASS_ErrorGetCode().ToString());
                 }
-                stream = Bass.BASS_StreamCreateFile(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "启动音频.wav", 0L, 0L, BASSFlag.BASS_SAMPLE_FLOAT);//播放选中的歌曲
+                stream = Bass.BASS_StreamCreateFile(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "启动音频.wav", 0L, 0L, BASSFlag.BASS_SAMPLE_FLOAT);//软件启动时播放选中的歌曲
                 Bass.BASS_ChannelPlay(stream, true);
             }
             catch { }
@@ -161,7 +161,7 @@ namespace Bassplayer
                }
                catch { }
            }
-           else//当播放模式为随机播放
+           else if(radioButton2.Checked)//当播放模式为随机播放
            {
 
                try
@@ -181,6 +181,30 @@ namespace Bassplayer
                }
                catch { }
            }
+                else  //单曲循环播放模式
+                {
+                    try
+                    {
+                        int index = listBox1.SelectedIndex;//获得当前选中的索引
+                        listBox1.SelectedIndices.Clear();//清空当前所有选中的索引
+
+                        // index++;
+                        // if (index == listBox1.Items.Count)
+                        // { index = 0; }
+                        listBox1.SelectedIndex = index;
+                        Bass.BASS_ChannelStop(stream);
+                        string songname = listpath[listBox1.SelectedIndex];
+                        stream = Bass.BASS_StreamCreateFile(songname, 0L, 0L, BASSFlag.BASS_SAMPLE_FLOAT);
+                        Bass.BASS_ChannelPlay(stream, true);
+                        label1.Text = "   " + songname;
+                        button1.Enabled = true;
+                        暂停ToolStripMenuItem.Text = "暂停";
+                        button1.Text = "暂停";
+                        p = true;
+                    }
+                    catch { }
+                }
+
             }
 
         }
@@ -205,7 +229,7 @@ namespace Bassplayer
          
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)  //播放按钮
         {
             if(p==true)//判断是否在播放
             {
@@ -225,7 +249,7 @@ namespace Bassplayer
 
         private void button2_Click(object sender, EventArgs e)//下一曲
         {
-            if (radioButton2.Checked)//判断播放模式
+            if (radioButton2.Checked)//判断播放模式,如果是随机播放，则执行以下代码
             {
                 try
                 {
@@ -244,7 +268,7 @@ namespace Bassplayer
                 }
                 catch { }
             }
-            else
+            else if(radioButton1.Checked )//如果是按列表顺序模式
             {
                 try
                 {
@@ -266,6 +290,28 @@ namespace Bassplayer
                     p = true;
                 }
                 catch { }          
+            }
+            else  //单曲循环播放模式
+            {
+                try {
+                    int index = listBox1.SelectedIndex;//获得当前选中的索引
+                    listBox1.SelectedIndices.Clear();//清空当前所有选中的索引
+
+                    // index++;
+                    // if (index == listBox1.Items.Count)
+                    // { index = 0; }
+                    listBox1.SelectedIndex = index;
+                    Bass.BASS_ChannelStop(stream);
+                    string songname = listpath[listBox1.SelectedIndex];
+                    stream = Bass.BASS_StreamCreateFile(songname, 0L, 0L, BASSFlag.BASS_SAMPLE_FLOAT);
+                    Bass.BASS_ChannelPlay(stream, true);
+                    label1.Text = "   " + songname;
+                    button1.Enabled = true;
+                    暂停ToolStripMenuItem.Text = "暂停";
+                    button1.Text = "暂停";
+                    p = true;
+                }
+                catch { }
             }
         }
 
@@ -290,7 +336,7 @@ namespace Bassplayer
 
         }
 
-        private void 暂停ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 暂停ToolStripMenuItem_Click(object sender, EventArgs e)//最小化时控制播放暂停代码
         {
             if (p == true)
             {
@@ -358,7 +404,7 @@ namespace Bassplayer
 
         }
 
-        private void notifyIcon1_Click(object sender, EventArgs e)
+        private void notifyIcon1_Click(object sender, EventArgs e)//窗口恢复正常代码
         {
             if (WindowState == FormWindowState.Minimized)
             {
@@ -370,26 +416,26 @@ namespace Bassplayer
             }
             }
 
-        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)//打开“关于文本”
         {   
             System.Diagnostics.Process.Start("notepad.exe","关于");
         }
 
-        private void 透明ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 透明ToolStripMenuItem_Click(object sender, EventArgs e)//设置透明主题
         {
             this.TransparencyKey = Color.DeepSkyBlue;
             this.BackColor = Color.DeepSkyBlue;
             listBox1.BackColor = TransparencyKey;
         }
 
-        private void 默认ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 默认ToolStripMenuItem_Click(object sender, EventArgs e)//设置默认主题
         {
             this.BackColor = Color.White;
             listBox1.BackColor = Color.White;
             this.Opacity = 0.65;
         }
 
-        private void 楷体ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 楷体ToolStripMenuItem_Click(object sender, EventArgs e)//设置字体为楷体代码
         {
             FontFamily kaiti = new FontFamily("楷体");
             this.Font = new Font(kaiti,9);
@@ -402,7 +448,7 @@ namespace Bassplayer
             groupBox1.Font = new Font(kaiti, 11);
         }
 
-        private void 默认ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void 默认ToolStripMenuItem1_Click(object sender, EventArgs e)//设置字体为默认宋体代码
         {
             FontFamily songti = new FontFamily("宋体");
             this.Font = new Font(songti, 9);
